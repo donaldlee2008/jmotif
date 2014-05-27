@@ -1,0 +1,43 @@
+<project name="jar" default="jar">
+  <description>
+  Provides the target for building a jar file.
+  </description>
+
+  <import file="build.xml" />
+  <property name="tmp.dir" location="${basedir}/tmp" />
+
+  <target name="jar" depends="clean, compile" description="Create jmotif.lib.jar containing SAX code.">
+
+    <!-- Define the directories and distribution name -->
+    <delete dir="${tmp.dir}" />
+    <mkdir dir="${tmp.dir}" />
+
+    <unjar src="${env.WEKA_HOME}/weka.jar" dest="${tmp.dir}" />
+    <unjar src="${lib.dir}/hackystat/hackystatlogger.lib.jar" dest="${tmp.dir}" />
+    <unjar src="${lib.dir}/hackystat/stacktrace.lib.jar" dest="${tmp.dir}" />
+    <unjar src="${lib.dir}/hackystat/tstamp.lib.jar" dest="${tmp.dir}" />
+    <unjar src="${lib.dir}/hackystat/time.lib.jar" dest="${tmp.dir}" />
+    <unjar src="${lib.dir}/hackystat/hackystatuserhome.lib.jar" dest="${tmp.dir}" />
+    <unjar src="${lib.dir}/mallet/mallet-deps.jar" dest="${tmp.dir}" />
+    <unjar src="${lib.dir}/mallet/mallet.jar" dest="${tmp.dir}" />
+
+
+    <copy todir="${tmp.dir}">
+      <fileset dir="${basedir}/build/classes/">
+        <include name="edu/hawaii/jmotif/**" />
+      </fileset>
+    </copy>
+
+    <!-- Define the directories and distribution name -->
+    <jar destfile="${basedir}/jmotif.standalone.jar" basedir="${tmp.dir}">
+      <manifest>
+        <attribute name="Implementation-Title" value="JMotif" />
+        <attribute name="Implementation-Version" value="${version}" />
+        <attribute name="Implementation-Vendor" value="Pavel Senin, senin@hawaii.edu" />
+      </manifest>
+    </jar>
+    <delete dir="${tmp.dir}" />
+  </target>
+
+</project>
+

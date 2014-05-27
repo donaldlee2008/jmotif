@@ -1,0 +1,59 @@
+<project name="jar" default="jar">
+  <description>
+  Provides the target for building a jar file.
+  </description>
+
+  <import file="build.xml" />
+  <property name="tmp.dir" location="${basedir}/tmp" />
+  <property name="tmp.lib.dir" location="${basedir}/tmp-lib" />
+
+  <target name="jar" depends="jar-sax" />
+
+  <target name="jar-sax" depends="clean, compile" description="Create jmotif.lib.jar containing SAX code.">
+    <!-- Define the directories and distribution name -->
+    <mkdir dir="${tmp.lib.dir}" />
+    <copy todir="${tmp.lib.dir}">
+      <fileset dir="${basedir}/build/classes/">
+        <include name="edu/hawaii/jmotif/**" />
+      </fileset>
+    </copy>
+    <jar destfile="${basedir}/jmotif.lib.jar" basedir="${tmp.lib.dir}">
+      <manifest>
+        <attribute name="Implementation-Title" value="JMotif" />
+        <attribute name="Implementation-Version" value="${version}" />
+        <attribute name="Implementation-Vendor" value="Collaborative Software Development Laboratory, University of Hawaii" />
+      </manifest>
+    </jar>
+    <delete dir="${tmp.lib.dir}" />
+
+    <!-- make sure to include dependencies into dep.jar -->
+    <delete dir="${tmp.dir}" />
+    <mkdir dir="${tmp.dir}" />
+
+    <unjar src="${env.WEKA_HOME}/weka.jar" dest="${tmp.dir}" />
+    <unjar src="${lib.dir}/hackystat/hackystatlogger.lib.jar" dest="${tmp.dir}" />
+    <unjar src="${lib.dir}/hackystat/stacktrace.lib.jar" dest="${tmp.dir}" />
+    <unjar src="${lib.dir}/hackystat/tstamp.lib.jar" dest="${tmp.dir}" />
+    <unjar src="${lib.dir}/hackystat/time.lib.jar" dest="${tmp.dir}" />
+    <unjar src="${lib.dir}/hackystat/hackystatuserhome.lib.jar" dest="${tmp.dir}" />
+    <unjar src="${lib.dir}/mallet/mallet-deps.jar" dest="${tmp.dir}" />
+    <unjar src="${lib.dir}/mallet/mallet.jar" dest="${tmp.dir}" />
+  	<unjar src="${lib.dir}/fast-dtw.jar" dest="${tmp.dir}" />
+    <unjar src="${lib.dir}/JFreeChart/jcommon-1.0.16.jar" dest="${tmp.dir}" />
+    <unjar src="${lib.dir}/JFreeChart/jfreechart-1.0.13.jar" dest="${tmp.dir}" />
+    <unjar src="${lib.dir}/commons-lang3-3.1.jar" dest="${tmp.dir}" />
+  	<unjar src="${lib.dir}/joda-time-2.1.jar" dest="${tmp.dir}" />
+    
+    <jar destfile="${basedir}/jmotif.dependencies.jar" basedir="${tmp.dir}">
+      <manifest>
+        <attribute name="Implementation-Title" value="JMotif Dependencies" />
+        <attribute name="Implementation-Version" value="${version}" />
+        <attribute name="Implementation-Vendor" value="Collaborative Software Development Laboratory, University of Hawaii" />
+      </manifest>
+    </jar>
+    <delete dir="${tmp.dir}" />
+
+  </target>
+
+</project>
+

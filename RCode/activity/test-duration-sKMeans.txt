@@ -1,0 +1,12 @@
+{2=[two3, two2, two1, two0, two4],
+ 1=[three0, three1, three2, three3, three4],
+ 0=[one3, one2, one4, one1, one0]}
+{2=[two3, two2, two1, two0, two4],
+ 1=[three0, three1, three2, three3, three4],
+ 0=[one3, one2, one4, one1, one0]}
+"","0","1","2"
+"0",0.00000,0.00000,0.00000
+"1",0.07554,0.00000,0.00000
+"2",0.16078,0.08059,0.00000
+
+Objective function: 20.058903332269946

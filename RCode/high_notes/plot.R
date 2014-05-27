@@ -1,0 +1,10 @@
+require(ggplot2)
+require(Cairo)
+require(reshape)
+require(scales)
+require(RColorBrewer)
+require(grid)
+library(gridExtra)
+require("lattice")
+
+data=read.csv("high_notes/score_top_quartile.csv",header=T)

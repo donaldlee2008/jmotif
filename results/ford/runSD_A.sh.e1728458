@@ -1,0 +1,4 @@
+main [FINE|main|7/24|11:20:25] reading file: data/ford/Ford_A_TRAIN 
+main [FINE|main|7/24|11:20:25] trainData classes: 2, series length: 500 
+main [FINE|main|7/24|11:20:25]  training class: 1 series: 1755 
+main [FINE|main|7/24|11:20:25]  training class: -1 series: 1846 

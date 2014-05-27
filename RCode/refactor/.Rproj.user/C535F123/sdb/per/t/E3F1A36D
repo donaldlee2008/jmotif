@@ -1,0 +1,16 @@
+{
+    "contents" : "ts=as.matrix(c(2.02, 2.33, 2.99, 6.85, 9.20, 8.80, 7.50, 6.00, 5.85, 3.85, 4.85, 3.85, 2.22, 1.45, 1.34))\n\nap=10\n  len <- ncol(ts)\n  res <- ts\n  if(len != ap){\n    if( (len %% ap) == 0 ){\n      res <- reshape(ts, len %/% ap, ap)\n    }else{\n      tmp <- matrix( rep(0, ap*len), ap, len)\n      for(i in 1:ap){\n        tmp[i, ] <- ts[1, ]\n      }\n      extended <- reshape(tmp, 1, ap*len)\n      res <- reshape(extended, len, ap)\n    }\n  }\n  matrix(colMeans(res), nrow=1, ncol=ap)\n}\n",
+    "created" : 1351605434716.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3847775908",
+    "id" : "E3F1A36D",
+    "lastKnownWriteTime" : 1351670122,
+    "path" : "/media/Stock/workspace-school/jmotif/RCode/refactor/SAXtest.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

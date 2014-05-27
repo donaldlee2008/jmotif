@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="lib/JFreeChart/jcommon-1.0.16.jar"/>
+	<classpathentry kind="lib" path="lib/JFreeChart/jfreechart-1.0.13.jar"/>
+	<classpathentry kind="lib" path="lib/hackystat/hackystatlogger.lib.jar"/>
+	<classpathentry kind="lib" path="lib/hackystat/hackystatuserhome.lib.jar"/>
+	<classpathentry kind="lib" path="lib/hackystat/stacktrace.lib.jar"/>
+	<classpathentry kind="lib" path="lib/hackystat/time.lib.jar"/>
+	<classpathentry kind="lib" path="lib/hackystat/tstamp.lib.jar"/>
+	<classpathentry kind="lib" path="lib/mallet/mallet-deps.jar"/>
+	<classpathentry kind="lib" path="lib/mallet/mallet.jar"/>
+	<classpathentry kind="lib" path="lib/weka/weka.jar" sourcepath="lib/weka/weka-src.jar"/>
+	<classpathentry kind="lib" path="lib/jmatio.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang3-3.1.jar"/>
+	<classpathentry kind="lib" path="lib/fast-dtw.jar"/>
+	<classpathentry kind="lib" path="lib/joda-time-2.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

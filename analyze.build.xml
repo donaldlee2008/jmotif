@@ -1,0 +1,54 @@
+<project name="analyze" default="analyze">
+  <description>
+    Runs junit, pmd, checkstyle, findbugs, and javadoc, failing the build if problems found.
+    Invocation: ant -f verify.build.xml
+  </description>
+
+  <!-- First, override the default settings of these properties. -->
+  <property name="javadoc.failonerror" value="false"/>
+  <property name="pmd.failonerror" value="false"/>
+  <property name="findbugs.failOnError" value="false"/>
+  <property name="checkstyle.failOnViolation" value="false"/>
+  <property name="junit.haltonfailure" value="false"/>
+
+  <!-- Now import the target definitions. -->
+  <import file="javadoc.build.xml"/>
+  <import file="pmd.build.xml"/>
+  <import file="findbugs.build.xml"/>
+  <import file="checkstyle.build.xml"/>
+  <import file="junit.build.xml"/>
+  <import file="emma.build.xml"/>
+  <import file="jar.build.xml"/>
+  <import file="dependencyfinder.build.xml"/>
+  <import file="sclc.build.xml"/>
+
+  <echo>
+    Hackystat Utilities Verification Task
+
+    System and Environment settings:
+      Ant version:     ${ant.version}
+      Checkstyle Home: ${env.CHECKSTYLE_HOME}
+      Emma Home:       ${env.EMMA_HOME}
+      FindBugs Home:   ${env.FINDBUGS_HOME}
+      Java version:    ${java.version}
+      JUnit Home:      ${env.JUNIT_HOME}
+      PMD  Home:       ${env.PMD_HOME}
+      DepFinder Home:  ${env.DEPENDENCYFINDER_HOME}
+
+    This task fails the build unless all of the following are true:
+      * System compiles without warnings or errors.
+      * JavaDocs can be built without warnings or errors.
+      * JUnit test cases all pass.
+      * Checkstyle of source code generates no warnings.
+      * PMD generates no warnings.
+      * FindBugs generates no warnings.
+
+    It also runs the Emma code coverage tool and prints a summary report.
+  </echo>
+
+  <target name="analyze"
+    depends="clean, compile, checkstyle,  junit, javadoc, pmd, findbugs, dependencyfinder, emma, jar, sclc"
+    description="Invoke analyzers, fail if any errors found.">
+  </target>
+
+</project>

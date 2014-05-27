@@ -1,0 +1,30 @@
+<project name="svn" default="svn.sensor" xmlns:ivy="antlib:org.apache.ivy.ant">
+	<description>
+  Provides an Ant task to extract Commit data from a Subversion server, then send this data off to Hackystat.
+</description>
+	<import file="build.xml" />
+	<property name="svn.repository.name" value="Trajectory" />
+	<property name="svn.repository.url" value="http://hackystat-ui-trajectory.googlecode.com/svn/trunk" />
+
+	<property name="default.sensorbase" value="http://dasha.ics.hawaii.edu:9876/sensorbase/" />
+	<property name="default.account" value="seninp@gmail.com" />
+
+
+	<!--
+    Important Note:  This task will not work correctly unless the following properties are
+    given functional values on the command line using the -D syntax:
+      ant -Ddefault.username=... -Ddefault.password=... -Ddefault.sensorbase=... -f svn.build.xml
+    See the StackyHack User Guide for details.
+  -->
+	<fail message="Must specify -Ddefault.account={account} on command line." unless="default.account" />
+	<fail message="Must specify -Ddefault.password={pw} on command line." unless="default.password" />
+	<fail message="Must specify -Ddefault.sensorbase={sensorbase} on command line." unless="default.sensorbase" />
+
+	<target name="svn.sensor" description="Sends Subversion commit data to Hackystat using the Subversion sensor.">
+		<ivy:retrieve module="hackystat" organisation="org.hackystat" revision="${hackystat.version}" pattern="${lib.dir}/hackystat/ant/[artifact].[ext]" sync="true" inline="true" log="download-only" conf="ant" transitive="false" type="jar" />
+		<taskdef resource="antlib.xml" classpath="${lib.dir}/hackystat/ant/antsensors.jar" />
+
+		<!-- Send Subversion data to Hackystat using the Subversion sensor. -->
+		<hacky-svn repositoryName="${svn.repository.name}" repositoryUrl="${svn.repository.url}" fileNamePrefix="file://hackystat-sensor-xmldata" fromDate="2007-10-16" toDate="2007-10-17" defaultHackystatAccount="${default.account}" defaultHackystatPassword="${default.password}" defaultHackystatSensorbase="${default.sensorbase}" verbose="${hackystat.verbose.mode}" />
+	</target>
+</project>

@@ -1,0 +1,23 @@
+dat=read.table("../data/ford/Ford_A_train.data")
+dat_labels=read.table("../data/ford/Ford_A_train.labels")
+dat2=read.table("../data/ford/Ford_A_valid.data")
+dat2_labels=read.table("../data/ford/Ford_A_valid.labels")
+data=cbind(rbind(dat_labels,dat2_labels),rbind(dat,dat2))
+write.csv(data, "../data/ford/Ford_A_TRAIN", row.names=FALSE, col.names=FALSE)
+
+dat=read.table("../data/ford/Ford_A_test.data")
+dat_labels=read.table("../data/ford/Ford_A_test.labels")
+data=cbind(dat_labels,dat)
+write.csv(data, "../data/ford/Ford_A_TEST", row.names=FALSE, col.names=FALSE)
+
+dat=read.table("../data/ford/Ford_B_train.data")
+dat_labels=read.table("../data/ford/Ford_B_train.labels")
+dat2=read.table("../data/ford/Ford_B_valid.data")
+dat2_labels=read.table("../data/ford/Ford_B_valid.labels")
+data=cbind(rbind(dat_labels,dat2_labels),rbind(dat,dat2))
+write.csv(data, "../data/ford/Ford_B_TRAIN", row.names=FALSE, col.names=FALSE)
+
+dat=read.table("../data/ford/Ford_B_test.data")
+dat_labels=read.table("../data/ford/Ford_B_test.labels")
+data=cbind(dat_labels,dat)
+write.csv(data, "../data/ford/Ford_B_TEST", row.names=FALSE, col.names=FALSE)
