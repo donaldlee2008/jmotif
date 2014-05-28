@@ -13,7 +13,8 @@ import edu.hawaii.jmotif.sax.datastructures.SAXFrequencyEntry;
 import edu.hawaii.jmotif.timeseries.TSException;
 import edu.hawaii.jmotif.timeseries.TSUtils;
 import edu.hawaii.jmotif.timeseries.Timeseries;
-import org.junit.Ignore;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Test SAX factory methods.
@@ -47,7 +48,6 @@ public class TestSAXFactory {
    *
    * @throws Exception if error occurs.
    */
-  @Ignore
   @Test
   public void testTs2string() throws Exception {
     Timeseries ts1 = TSUtils.readTS(ts1File, length);
@@ -85,7 +85,6 @@ public class TestSAXFactory {
    *
    * @throws Exception if error occur.
    */
-  @Ignore
   @Test
   public void testTs2sax() throws Exception {
     Timeseries ts1 = TSUtils.readTS(ts1File, length);
@@ -114,7 +113,6 @@ public class TestSAXFactory {
    *
    * @throws TSException if error occurs.
    */
-  @Ignore
   @Test
   public void testStringDistance() throws TSException {
       double testDelta = 0.010000;
@@ -136,7 +134,6 @@ public class TestSAXFactory {
    *
    * @throws Exception if error occurs.
    */
-  @Ignore
   @Test
   public void testTs2stringWithNAN() throws Exception {
 
@@ -165,7 +162,6 @@ public class TestSAXFactory {
    *
    * @throws Exception if error occurs.
    */
-  @Ignore
   @Test
   public void testTs2saxZnormByCuts() throws Exception {
     //
@@ -202,11 +198,6 @@ public class TestSAXFactory {
 
   }
 
-  /**
-   * Test the SAX conversion when NaN's presented in the timeseries.
-   *
-   * @throws Exception if error occurs.
-   */
   @Test
   public void testTs2saxNoZnormByCuts() throws Exception {
     //
@@ -217,10 +208,29 @@ public class TestSAXFactory {
     //
     // convert to sax with 2 letters alphabet and internal normalization
     double[] cut = { 0.0D };
-    //SAXFrequencyData sax = SAXFactory.ts2saxNoZnormByCuts(ts1, 14, 10, cut);
-    //Iterator<SAXFrequencyEntry> i = sax.iterator();
-    //SAXFrequencyEntry entry0 = i.next();
-    //assertTrue("Testing SAX routines", entry0.getSubstring().equalsIgnoreCase("bbbbbbbbbb"));
+    SAXFrequencyData sax = SAXFactory.ts2saxNoZnormByCuts(ts1, 14, 10, cut);
+    Iterator<SAXFrequencyEntry> i = sax.iterator();
+    SAXFrequencyEntry entry0 = i.next();
+    String expected = "bbbbbbbbbb";
+    String actual = entry0.getSubstring().toLowerCase();
+    assertEquals("Testing SAX routines", expected, actual);
+  }
+  
+  /**
+   * Test the SAX conversion when NaN's presented in the timeseries.
+   *
+   * @throws Exception if error occurs.
+   */
+  @Test
+  public void testTs2saxNoZnormByCutsWithNegativeNumbers() throws Exception {
+    //
+    // get series
+    Timeseries ts1 = TSUtils.readTS(ts1File, length);
+    Timeseries ts2 = TSUtils.readTS(ts2File, length);
+
+    //
+    // convert to sax with 2 letters alphabet and internal normalization
+    double[] cut = { 0.0D };
 
     //
     // now add two negatives
@@ -228,22 +238,17 @@ public class TestSAXFactory {
     ts1.elementAt(4).setValue(-5.0D);
     SAXFrequencyData sax = SAXFactory.ts2saxNoZnormByCuts(ts1, 14, 10, cut);
 
+    Set<String> expected = new TreeSet();
+    expected.add("bbabbbbbbb");
+    expected.add("bbbabbbbbb");
     
+    Set<String> actual = new TreeSet();
     Iterator<SAXFrequencyEntry> i = sax.iterator();
     while (i.hasNext()) {
         SAXFrequencyEntry e = i.next();
-        System.out.println("text; values: " + e.getSubstring());
+        actual.add(e.getSubstring().toLowerCase());
     }
-    
-    i = sax.iterator();
-    SAXFrequencyEntry entry0 = i.next();
-    
-    String expected = "bbabbbbbbb";
-    String expected_shippable = "bbbabbbbbb";
-    String actual = entry0.getSubstring().toLowerCase();
 
-    System.out.println(String.format("expected[%s]  actual[%s]", expected, actual));
-    
     assertEquals("Testing SAX routines", expected, actual);
 
     //
@@ -257,9 +262,46 @@ public class TestSAXFactory {
   }
 
   /**
+   * Test the SAX conversion when NaN's presented in the timeseries.
+   *
+   * @throws Exception if error occurs.
+   */
+  @Test
+  public void testTs2saxNoZnormByCuts_2_by_2() throws Exception {
+    //
+    // get series
+    Timeseries ts1 = TSUtils.readTS(ts1File, length);
+    Timeseries ts2 = TSUtils.readTS(ts2File, length);
+
+    //
+    // convert to sax with 2 letters alphabet and internal normalization
+    double[] cut = { 0.0D };
+
+    //
+    // now add two negatives
+    ts1.elementAt(5).setValue(-5.0D);
+    ts1.elementAt(4).setValue(-5.0D);
+    SAXFrequencyData sax = SAXFactory.ts2saxNoZnormByCuts(ts1, 2, 2, cut);
+
+    Set<String> expected = new TreeSet();
+    expected.add("aa");
+    expected.add("ab");
+    expected.add("ba");
+    expected.add("bb");
+    
+    Set<String> actual = new TreeSet();
+    Iterator<SAXFrequencyEntry> i = sax.iterator();
+    while (i.hasNext()) {
+        SAXFrequencyEntry e = i.next();
+        actual.add(e.getSubstring().toLowerCase());
+    }
+
+    assertEquals("Testing SAX routines", expected, actual);
+  }
+
+  /**
    * Test the distance function (between strings).
    */
-  @Ignore
   @Test
   public void testStrDistance() {
     assertEquals("Testing StrDistance", 1, SAXFactory.strDistance('a', 'b'));

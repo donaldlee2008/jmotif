@@ -227,10 +227,6 @@ public final class SAXFactory {
   public static SAXFrequencyData ts2saxNoZnormByCuts(Timeseries ts, int windowSize, int paaSize,
       double[] cuts) throws TSException {
 
-      System.out.println("##########################");
-      System.out.println("##########################");
-      System.out.println("ts2saxNoZnormByCuts; START");
-
       // Initialize symbolic result data
     SAXFrequencyData res = new SAXFrequencyData();
     String previousString = "";
@@ -241,7 +237,6 @@ public final class SAXFactory {
 
       // fix the current subsection
       Timeseries subSection = ts.subsection(i, i + windowSize - 1);
-      System.out.println("ts2saxNoZnormByCuts; subSection: " + subSection);
 
       // Z normalize it
       // subSection = TSUtils.normalize(subSection);
@@ -257,18 +252,15 @@ public final class SAXFactory {
 
       // Convert the PAA to a string.
       char[] currentString = TSUtils.ts2StringWithNaNByCuts(paa, cuts);
-      System.out.println("ts2saxNoZnormByCuts; currentString: " + new String(currentString));
 
       // check if previous one was the same, if so, ignore that (don't
       // know why though, but guess
       // cause we didn't advance much on the timeseries itself)
       if (!previousString.isEmpty() && previousString.equalsIgnoreCase(new String(currentString))) {
         previousString = new String(currentString);
-          System.out.println(String.format("Setting previous string [%s] and continuing.", previousString));
         continue;
       }
       previousString = new String(currentString);
-          System.out.println(String.format("Setting Data: i[%d]  s[%s]", i, new String(currentString)));
       res.put(new String(currentString), i);
     }
     return res;
