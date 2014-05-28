@@ -237,6 +237,7 @@ public final class SAXFactory {
 
       // fix the current subsection
       Timeseries subSection = ts.subsection(i, i + windowSize - 1);
+      System.out.println("ts2saxNoZnormByCuts; subSection: " + subSection);
 
       // Z normalize it
       // subSection = TSUtils.normalize(subSection);
@@ -252,6 +253,7 @@ public final class SAXFactory {
 
       // Convert the PAA to a string.
       char[] currentString = TSUtils.ts2StringWithNaNByCuts(paa, cuts);
+      System.out.println("ts2saxNoZnormByCuts; currentString: " + new String(currentString));
 
       // check if previous one was the same, if so, ignore that (don't
       // know why though, but guess
