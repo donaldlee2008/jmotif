@@ -57,7 +57,7 @@ public final class TextUtils {
       // here populate result map with empty entries
       res.put(bag.getLabel(), new HashMap<String, Double>());
 
-      // and get those words
+    // and get those words
       for (Entry<String, AtomicInteger> e : bag.getInternalWords().entrySet()) {
 
         if (allWords.containsKey(e.getKey())) {
@@ -69,7 +69,7 @@ public final class TextUtils {
       }
 
     }
-
+    
     // outer loop - iterating over documents
     for (WordBag bag : texts) {
 
@@ -105,8 +105,7 @@ public final class TextUtils {
 
           // compute the IDF
           //
-          double idfLOGValue = Math.log10(Integer.valueOf(totalDocs).doubleValue()
-              / word.getValue().doubleValue());
+          double idfLOGValue = Math.log10(Integer.valueOf(totalDocs).doubleValue() / word.getValue().doubleValue());
 
           // and the TF-IDF
           //
@@ -269,8 +268,7 @@ public final class TextUtils {
    * @return The idf value.
    */
   public static synchronized double idf(HashMap<String, WordBag> bags, String string) {
-    return Integer.valueOf(bags.size()).doubleValue()
-        / Integer.valueOf(df(bags, string)).doubleValue();
+    return ((double)bags.size()) / ((double)df(bags, string));
   }
 
   public static synchronized String tfidfToTable(HashMap<String, HashMap<String, Double>> tfidf) {
