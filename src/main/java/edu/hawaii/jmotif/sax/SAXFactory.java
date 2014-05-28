@@ -227,7 +227,11 @@ public final class SAXFactory {
   public static SAXFrequencyData ts2saxNoZnormByCuts(Timeseries ts, int windowSize, int paaSize,
       double[] cuts) throws TSException {
 
-    // Initialize symbolic result data
+      System.out.println("##########################");
+      System.out.println("##########################");
+      System.out.println("ts2saxNoZnormByCuts; START");
+
+      // Initialize symbolic result data
     SAXFrequencyData res = new SAXFrequencyData();
     String previousString = "";
 
@@ -260,9 +264,11 @@ public final class SAXFactory {
       // cause we didn't advance much on the timeseries itself)
       if (!previousString.isEmpty() && previousString.equalsIgnoreCase(new String(currentString))) {
         previousString = new String(currentString);
+          System.out.println(String.format("Setting previous string [%s] and continuing.", previousString));
         continue;
       }
       previousString = new String(currentString);
+          System.out.println(String.format("Setting Data: i[%d]  s[%s]", i, new String(currentString)));
       res.put(new String(currentString), i);
     }
     return res;
