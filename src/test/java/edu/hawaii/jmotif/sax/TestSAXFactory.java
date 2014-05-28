@@ -228,8 +228,11 @@ public class TestSAXFactory {
     sax = SAXFactory.ts2saxNoZnormByCuts(ts1, 14, 10, cut);
     i = sax.iterator();
     entry0 = i.next();
-    System.out.println("entry0.getSubstring().equalsIgnoreCase(\"bbabbbbbbb\"): " + entry0.getSubstring().equalsIgnoreCase("bbabbbbbbb"));
-    assertTrue("Testing SAX routines", entry0.getSubstring().equalsIgnoreCase("bbabbbbbbb"));
+    
+    String expected = "bbabbbbbbb";
+    String actual = entry0.getSubstring().toLowerCase();
+
+    assertEquals("Testing SAX routines", expected, actual);
 
     //
     //
