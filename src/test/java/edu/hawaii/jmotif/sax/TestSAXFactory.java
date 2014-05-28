@@ -13,6 +13,7 @@ import edu.hawaii.jmotif.sax.datastructures.SAXFrequencyEntry;
 import edu.hawaii.jmotif.timeseries.TSException;
 import edu.hawaii.jmotif.timeseries.TSUtils;
 import edu.hawaii.jmotif.timeseries.Timeseries;
+import org.junit.Ignore;
 
 /**
  * Test SAX factory methods.
@@ -203,6 +204,7 @@ public class TestSAXFactory {
    *
    * @throws Exception if error occurs.
    */
+  @Ignore
   @Test
   public void testTs2saxNoZnormByCuts() throws Exception {
     //
