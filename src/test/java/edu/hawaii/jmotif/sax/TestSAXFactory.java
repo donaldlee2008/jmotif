@@ -13,7 +13,6 @@ import edu.hawaii.jmotif.sax.datastructures.SAXFrequencyEntry;
 import edu.hawaii.jmotif.timeseries.TSException;
 import edu.hawaii.jmotif.timeseries.TSUtils;
 import edu.hawaii.jmotif.timeseries.Timeseries;
-import org.junit.Ignore;
 
 /**
  * Test SAX factory methods.
@@ -40,8 +39,6 @@ public class TestSAXFactory {
 
   private static final Alphabet normalA = new NormalAlphabet();
 
-  private Timeseries ts1, ts2;
-
   private static final double delta = 0.000001;
 
   /**
@@ -51,8 +48,8 @@ public class TestSAXFactory {
    */
   @Test
   public void testTs2string() throws Exception {
-    ts1 = TSUtils.readTS(ts1File, length);
-    ts2 = TSUtils.readTS(ts2File, length);
+    Timeseries ts1 = TSUtils.readTS(ts1File, length);
+    Timeseries ts2 = TSUtils.readTS(ts2File, length);
 
     // series #1 based test
     String ts1sax = SAXFactory.ts2string(ts1, 10, normalA, 11);
@@ -88,8 +85,8 @@ public class TestSAXFactory {
    */
   @Test
   public void testTs2sax() throws Exception {
-    ts1 = TSUtils.readTS(ts1File, length);
-    ts2 = TSUtils.readTS(ts2File, length);
+    Timeseries ts1 = TSUtils.readTS(ts1File, length);
+    Timeseries ts2 = TSUtils.readTS(ts2File, length);
 
     String ts2str_0 = SAXFactory.ts2string(ts2.subsection(0, 4), 5, normalA, 10);
     String ts2str_3 = SAXFactory.ts2string(ts2.subsection(3, 7), 5, normalA, 10);
@@ -139,8 +136,8 @@ public class TestSAXFactory {
   public void testTs2stringWithNAN() throws Exception {
 
     // read the timeseries first
-    ts1 = TSUtils.readTS(ts1File, length);
-    ts2 = TSUtils.readTS(ts2File, length);
+    Timeseries ts1 = TSUtils.readTS(ts1File, length);
+    Timeseries ts2 = TSUtils.readTS(ts2File, length);
 
     // series #1 based test
     String ts1sax = SAXFactory.ts2string(ts1, 10, normalA, 11);
@@ -167,19 +164,19 @@ public class TestSAXFactory {
   public void testTs2saxZnormByCuts() throws Exception {
     //
     // get series
-    ts1 = TSUtils.readTS(ts1File, length);
-    ts2 = TSUtils.readTS(ts2File, length);
+    Timeseries timeSeries01 = TSUtils.readTS(ts1File, length);
+    Timeseries timeSeries02 = TSUtils.readTS(ts2File, length);
 
     //
     // convert to sax with 2 letters alphabet and internal normalization
 
     double[] cut = { 0.0D };
-    SAXFrequencyData sax = SAXFactory.ts2saxZnormByCuts(ts1, 14, 10, cut);
+    SAXFrequencyData sax = SAXFactory.ts2saxZnormByCuts(timeSeries01, 14, 10, cut);
     Iterator<SAXFrequencyEntry> i = sax.iterator();
     SAXFrequencyEntry entry0 = i.next();
     assertTrue("Testing SAX routines", entry0.getSubstring().equalsIgnoreCase("aabbbbaaaa"));
 
-    sax = SAXFactory.ts2saxZnormByCuts(ts1, 2, 2, cut);
+    sax = SAXFactory.ts2saxZnormByCuts(timeSeries01, 2, 2, cut);
     i = sax.iterator();
     entry0 = i.next();
     SAXFrequencyEntry entry1 = i.next();
@@ -187,9 +184,9 @@ public class TestSAXFactory {
         entry1.getSubstring()));
 
     // test double[] version here
-    double[] data = new double[ts1.size()];
+    double[] data = new double[timeSeries01.size()];
     for (int k = 0; k < data.length; k++) {
-      data[k] = ts1.elementAt(k).value();
+      data[k] = timeSeries01.elementAt(k).value();
     }
 
     sax = SAXFactory.ts2saxZnormByCuts(data, 14, 10, cut);
@@ -204,13 +201,12 @@ public class TestSAXFactory {
    *
    * @throws Exception if error occurs.
    */
-  @Ignore
   @Test
   public void testTs2saxNoZnormByCuts() throws Exception {
     //
     // get series
-    ts1 = TSUtils.readTS(ts1File, length);
-    ts2 = TSUtils.readTS(ts2File, length);
+    Timeseries ts1 = TSUtils.readTS(ts1File, length);
+    Timeseries ts2 = TSUtils.readTS(ts2File, length);
 
     //
     // convert to sax with 2 letters alphabet and internal normalization
