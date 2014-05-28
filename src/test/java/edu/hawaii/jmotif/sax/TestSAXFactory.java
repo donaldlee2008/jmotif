@@ -214,6 +214,11 @@ public class TestSAXFactory {
     SAXFrequencyData sax = SAXFactory.ts2saxNoZnormByCuts(ts1, 14, 10, cut);
     Iterator<SAXFrequencyEntry> i = sax.iterator();
     SAXFrequencyEntry entry0 = i.next();
+    
+    System.out.println("------------------");
+    System.out.println("------------------");
+    System.out.println("entry0.getSubstring().equalsIgnoreCase(\"bbbbbbbbbb\"): " + entry0.getSubstring().equalsIgnoreCase("bbbbbbbbbb"));
+    
     assertTrue("Testing SAX routines", entry0.getSubstring().equalsIgnoreCase("bbbbbbbbbb"));
 
     //
@@ -223,6 +228,7 @@ public class TestSAXFactory {
     sax = SAXFactory.ts2saxNoZnormByCuts(ts1, 14, 10, cut);
     i = sax.iterator();
     entry0 = i.next();
+    System.out.println("entry0.getSubstring().equalsIgnoreCase(\"bbabbbbbbb\"): " + entry0.getSubstring().equalsIgnoreCase("bbabbbbbbb"));
     assertTrue("Testing SAX routines", entry0.getSubstring().equalsIgnoreCase("bbabbbbbbb"));
 
     //
@@ -231,8 +237,8 @@ public class TestSAXFactory {
     i = sax.iterator();
     entry0 = i.next();
     SAXFrequencyEntry entry1 = i.next();
-    assertFalse("Testing SAX routines", entry0.getSubstring().equalsIgnoreCase(
-        entry1.getSubstring()));
+    System.out.println("entry0.getSubstring().equalsIgnoreCase(entry1.getSubstring()): " + entry0.getSubstring().equalsIgnoreCase(entry1.getSubstring()));
+    assertFalse("Testing SAX routines", entry0.getSubstring().equalsIgnoreCase(entry1.getSubstring()));
   }
 
   /**
