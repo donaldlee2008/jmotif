@@ -232,6 +232,8 @@ public class TestSAXFactory {
     String expected = "bbabbbbbbb";
     String actual = entry0.getSubstring().toLowerCase();
 
+    System.out.println(String.format("expected[%s]  actual[%s]", expected, actual));
+    
     assertEquals("Testing SAX routines", expected, actual);
 
     //
