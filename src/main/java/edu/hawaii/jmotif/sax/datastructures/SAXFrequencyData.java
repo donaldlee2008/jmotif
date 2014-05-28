@@ -38,9 +38,11 @@ public class SAXFrequencyData implements Iterable<SAXFrequencyEntry> {
   public void put(String substring, int idx) {
     SAXFrequencyEntry sfe = this.data.get(substring);
     if (null == sfe) {
+        System.out.println(String.format("SAXFrequencyData; substring[%s] new entry.", substring));
       this.data.put(substring, new SAXFrequencyEntry(substring, idx));
     }
     else {
+        System.out.println(String.format("SAXFrequencyData; substring[%s] existing entry.", substring));
       sfe.put(idx);
     }
   }
@@ -91,6 +93,9 @@ public class SAXFrequencyData implements Iterable<SAXFrequencyEntry> {
    */
   @Override
   public Iterator<SAXFrequencyEntry> iterator() {
+      for (SAXFrequencyEntry e : data.values()) {
+          System.out.println("SAXFrequencyData; values: " + e.getSubstring());
+      }
     return this.data.values().iterator();
   }
 

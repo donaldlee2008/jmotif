@@ -227,7 +227,15 @@ public class TestSAXFactory {
     ts1.elementAt(5).setValue(-5.0D);
     ts1.elementAt(4).setValue(-5.0D);
     SAXFrequencyData sax = SAXFactory.ts2saxNoZnormByCuts(ts1, 14, 10, cut);
+
+    
     Iterator<SAXFrequencyEntry> i = sax.iterator();
+    while (i.hasNext()) {
+        SAXFrequencyEntry e = i.next();
+        System.out.println("text; values: " + e.getSubstring());
+    }
+    
+    i = sax.iterator();
     SAXFrequencyEntry entry0 = i.next();
     
     String expected = "bbabbbbbbb";
