@@ -23,7 +23,9 @@
         <dependency>
             <groupId>com.dtw</groupId>
             <artifactId>fastdtw</artifactId>
-            <version>1.1.0</version>
+            <version>unknown</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/fast-dtw.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -53,22 +55,30 @@
         <dependency>
             <groupId>org.hackystat</groupId>
             <artifactId>hackystatlogger</artifactId>
-            <version>r242</version>
+            <version>unknown</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/hackystat/hackystatlogger.lib.jar</systemPath>
         </dependency>        
         <dependency>
             <groupId>org.hackystat</groupId>
             <artifactId>stacktrace</artifactId>
-            <version>r242</version>
+            <version>unknown</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/hackystat/stacktrace.lib.jar</systemPath>
         </dependency>        
         <dependency>
             <groupId>org.hackystat</groupId>
             <artifactId>userhome</artifactId>
-            <version>r242</version>
+            <version>unknown</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/hackystat/hackystatuserhome.lib.jar</systemPath>
         </dependency>        
         <dependency>
             <groupId>org.hackystat</groupId>
             <artifactId>tstamp</artifactId>
-            <version>r242</version>
+            <version>unknown</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/hackystat/tstamp.lib.jar</systemPath>
         </dependency>        
         <dependency>
             <groupId>junit</groupId>
